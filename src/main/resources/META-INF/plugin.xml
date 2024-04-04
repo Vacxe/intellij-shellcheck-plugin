@@ -1,0 +1,31 @@
+<idea-plugin>
+    <id>io.github.vacxe.shellcheck</id>
+    <name>Shellcheck</name>
+    <vendor email="aksenov.kostya@gmail.com" url="https://www.github.com/vacxe">Vacxe</vendor>
+    <description><![CDATA[
+        Plugin for Shellcheck integration to provide highlighting lint issues in IDE
+    ]]></description>
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <externalAnnotator language="Shell Script" implementationClass="io.github.vacxe.shellcheck.ShellcheckAnnotator"/>
+        <problemsViewPanelProvider implementation="io.github.vacxe.shellcheck.problems.FindingsView"/>
+    </extensions>
+
+    <actions>
+        <group id="io.github.vacxe.shellcheck.actions.RunShellcheckMenuGroup"
+               text="Run Shellcheck"
+               popup="true"
+               class="io.github.vacxe.shellcheck.actions.RunShellcheckMenuGroup">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="ChangesViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+
+            <action id="io.github.vacxe.shellcheck.actions.idea.menu.analyze"
+                    class="io.github.vacxe.shellcheck.actions.RunAnalysisAction"
+                    popup="true"
+                    text="Analyze File"/>
+        </group>
+    </actions>
+</idea-plugin>
